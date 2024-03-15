@@ -1,15 +1,15 @@
 ﻿// Вариант 1
 
-
-// Solution.CompleteTask(new Task1());
+Solution.CompleteTask(new Task1());
 Solution.CompleteTask(new Task2());
-// Solution.CompleteTask(new Task3());
+Solution.CompleteTask(new Task3());
 
 class Solution
 {
   public static void CompleteTask(ITask task)
   {
     task.Execute();
+
   }
 }
 
@@ -35,7 +35,8 @@ class Task1 : ITask
     }
     if (arr.Count < 15) throw new Exception("Должно быть не менее 15 элементов");
 
-    int sumOfPositive = arr.Where(n => n > 0).Aggregate(0, (acc, n) => acc + n);
+
+    int sumOfPositive = arr.Where(n => n > 0).Sum();
 
     Console.WriteLine("Сумма положительных элементов массива: " + sumOfPositive);
   }
@@ -110,7 +111,7 @@ class Task3 : ITask
   {
 
     List<Purchase> purchases = new List<Purchase>();
-    Console.WriteLine("Веедите список покупок в виде: <название> <цена>");
+    Console.WriteLine("Введите список покупок в виде: <название> <цена>");
 
     string input = Console.ReadLine();
     while (input != "")
