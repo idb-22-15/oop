@@ -1,9 +1,9 @@
 ﻿// Вариант 1
 
 
-Solution.CompleteTask(new Task1());
+// Solution.CompleteTask(new Task1());
 Solution.CompleteTask(new Task2());
-Solution.CompleteTask(new Task3());
+// Solution.CompleteTask(new Task3());
 
 class Solution
 {
@@ -26,12 +26,14 @@ class Task1 : ITask
     string input = Console.ReadLine();
 
     string[] inputArray = input.Split(' ');
+
     List<int> arr = new List<int>();
 
     foreach (string num in inputArray)
     {
       arr.Add(int.Parse(num));
     }
+    if (arr.Count < 15) throw new Exception("Должно быть не менее 15 элементов");
 
     int sumOfPositive = arr.Where(n => n > 0).Aggregate(0, (acc, n) => acc + n);
 
