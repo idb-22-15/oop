@@ -1,0 +1,32 @@
+# Ignore Visual Studio files
+.vs/
+*.vscode/
+*.suo
+*.user
+*.sln
+
+# Ignore build output
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.cache
+
+# Ignore NuGet packages
+packages/
+
+# Ignore user-specific files
+*.userprefs
+*.usertasks
+*.userassemblyinfo
+
+# Ignore build-related files
+_ReSharper*/
+*.resharper
+[Tt]est[Rr]esult*
+
+# Ignore .NET Core and Visual Studio Code folders
+.vscode/
+.vs/
