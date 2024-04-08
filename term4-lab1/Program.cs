@@ -12,9 +12,10 @@ Using. Инструкции и директивы
 Список List<T>
 */
 
+
 Solution.CompleteTask(new Task1());
-Solution.CompleteTask(new Task2());
-Solution.CompleteTask(new Task3());
+// Solution.CompleteTask(new Task2());
+// Solution.CompleteTask(new Task3());
 
 class Solution
 {
@@ -30,10 +31,19 @@ interface ITask
   void Execute();
 }
 
+
 class Task1 : ITask
 {
+  public void MyWrite(object obj)
+  {
+    Console.WriteLine(obj);
+  }
   public void Execute()
   {
+    object obj = 20;
+    int x = (string)obj;
+    Console.WriteLine(x);
+
     Console.WriteLine("Введите элементы массива через пробел:");
     string input = Console.ReadLine();
 
@@ -146,12 +156,37 @@ class Task3 : ITask
     List<Purchase> min1000 = purchases.Where(p => p.Price >= 1000).ToList();
     min1000.ForEach(p => Console.WriteLine("Название: " + p.Product + ", Цена: " + p.Price));
   }
+
+
 }
 
 /*
 
 Описание языка C#:
 C# (C Sharp) - это современный объектно-ориентированный язык программирования, разработанный компанией Microsoft. Он широко используется для создания разнообразных типов приложений, включая веб-приложения, мобильные приложения, игры, приложения для Windows и многие другие.
+
+Типы значений (Value Types):
+
+Целочисленные типы: int, long, short, byte, sbyte, uint, ulong, ushort, char.
+Типы с плавающей точкой: float, double, decimal.
+Логический тип: bool.
+Перечисления (enum).
+Структуры (struct).
+Ссылочные типы (Reference Types):
+
+Классы (class).
+Интерфейсы (interface).
+Массивы.
+Строки (string).
+Делегаты (delegate).
+Другие типы:
+
+Тип object: базовый тип для всех других типов в C#.
+powerful features like inheritance, polymorphism, and encapsulation.
+Пользовательские типы:
+
+Пользовательские типы данных, созданные программистом с использованием ключевого слова struct или class.
+
 
 Типы данных языка C#:
 Целочисленные типы (Integral Types):
