@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using app.Models;
 
 namespace app.Db
 {
@@ -12,7 +13,7 @@ namespace app.Db
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=../sqlite.db");
+            optionsBuilder.UseSqlite("Data Source=./sqlite.db");
         }
     }
 }

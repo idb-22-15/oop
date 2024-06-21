@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using app;
+using app.Db;
 
 #nullable disable
 
-namespace _12.Migrations
+namespace app.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240621160302_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240621161550_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,7 +19,7 @@ namespace _12.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
 
-            modelBuilder.Entity("app.KeyValue", b =>
+            modelBuilder.Entity("app.Models.KeyValue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

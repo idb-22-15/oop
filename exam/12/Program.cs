@@ -1,29 +1,27 @@
-﻿// Models.cs
-// Program.cs
-using System;
-// using app.Db;
-// using app.Models;
+﻿using System;
+using app.Db;
+using app.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace app
-{
-  public class KeyValue
-  {
-    public int Id { get; set; }
-    public required string Value { get; set; }
-  }
+// namespace app
+// {
+//   public class KeyValue
+//   {
+//     public int Id { get; set; }
+//     public required string Value { get; set; }
+//   }
 
-  public class AppDbContext : DbContext
-  {
-    public DbSet<KeyValue> KeyValues { get; set; }
+//   public class AppDbContext : DbContext
+//   {
+//     public DbSet<KeyValue> KeyValues { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-      optionsBuilder.UseSqlite("Data Source=sqlite.db");
-    }
-  }
-}
+//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//     {
+//       optionsBuilder.UseSqlite("Data Source=sqlite.db");
+//     }
+//   }
+// }
 
 namespace app
 {
