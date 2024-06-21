@@ -31,7 +31,7 @@ namespace app
         }
         sw.Stop();
         var averageTimeKey = sw.ElapsedMilliseconds / 1000.0;
-        Console.WriteLine($"Среднее время поиска по ключу: {averageTimeKey} ms");
+        Console.WriteLine($"Среднее время поиска по ключу: {averageTimeKey} мс");
 
         // Измерение времени поиска по значению
         sw.Restart();
@@ -42,7 +42,7 @@ namespace app
         }
         sw.Stop();
         var averageTimeValue = sw.ElapsedMilliseconds / 1000.0;
-        Console.WriteLine($"Среднее время поиска по значению: {averageTimeValue} ms");
+        Console.WriteLine($"Среднее время поиска по значению: {averageTimeValue} мс");
       }
     }
   }
