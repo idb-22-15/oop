@@ -12,7 +12,7 @@ class Program
     {
         // Создаем экземпляр делегата для метода void (int, string, bool)
         MyDelegateVoid voidDelegate = new MyDelegateVoid(MyVoidMethod);
-        
+
         // Создаем экземпляр делегата для метода int (int[], double)
         MyDelegateInt intDelegate = new MyDelegateInt(MyIntMethod);
 

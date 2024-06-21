@@ -43,7 +43,7 @@ class Program
             bool bool1 = random.Next(2) == 0; // true или false
 
             string str2 = Guid.NewGuid().ToString().Substring(0, 8);
-            bool bool2 = random.Next(2) == 0; 
+            bool bool2 = random.Next(2) == 0;
 
             // Создание объектов класса DerivedClass и добавление в массивы
             array1[i] = new DerivedClass(str1, bool1);
