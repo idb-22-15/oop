@@ -1,12 +1,13 @@
-﻿using System;
-using System.Threading;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+
 class Program
 {
+  static readonly object lockObject = new();
+  static readonly int[] waitTimes = new int[10];
+
   static void Main(string[] args)
   {
     int numThreads = 10;
-    int[] executionTimes = new int[numThreads];
     Thread[] threads = new Thread[numThreads];
 
     for (int i = 0; i < numThreads; i++)
@@ -14,55 +15,74 @@ class Program
       int threadIndex = i;
       threads[i] = new Thread(() =>
       {
-        int x = new Random().Next(0, 1001);
-        int arraySize = new Random().Next(10000000, 15000001);
-        int[] array = GenerateRandomArray(arraySize, 0, 1001);
+        var random = new Random();
+        int x = random.Next(0, 1001);
+        int arraySize = random.Next(10000000, 15000001);
+        int[] array = GenerateRandomArray(arraySize, 0, 1000);
+        Array.Sort(array);
 
         var watch = Stopwatch.StartNew();
-        int count = CountElementsEqualToX(array, x);
+        bool acquired = false;
+        while (!acquired)
+        {
+          try
+          {
+            Monitor.TryEnter(lockObject, ref acquired);
+          }
+          catch (ThreadInterruptedException)
+          {
+          }
+        }
         watch.Stop();
+        waitTimes[threadIndex] = (int)watch.ElapsedMilliseconds;
 
-        executionTimes[threadIndex] = (int)watch.ElapsedMilliseconds;
-        Console.WriteLine($"Поток {threadIndex + 1}: Количество элементов, равных {x}: {count}. Время выполнения: {executionTimes[threadIndex]} мс");
+        int count = CountElementsEqualToX(array, x);
+        Monitor.Exit(lockObject);
+
+        Console.WriteLine($"Поток {threadIndex + 1}: Количество элементов, равных {x}: {count}. Время ожидания: {waitTimes[threadIndex]} мс");
       });
       threads[i].Start();
-
-      foreach (Thread thread in threads)
-      {
-        thread.Join();
-      }
-
-      int minTime = executionTimes.Min();
-      int maxTime = executionTimes.Max();
-      int avgTime = (int)executionTimes.Average();
-
-      Console.WriteLine($"Минимальное время выполнения: {minTime} мс");
-      Console.WriteLine($"Максимальное время выполнения: {maxTime} мс");
-      Console.WriteLine($"Среднее время выполнения: {avgTime} мс");
     }
 
-    static int[] GenerateRandomArray(int size, int min, int max)
+    foreach (Thread thread in threads)
     {
-      int[] array = new int[size];
-      var random = new Random();
-      for (int i = 0; i < size; i++)
-      {
-        array[i] = random.Next(min, max + 1);
-      }
-      return array;
+      thread.Join();
     }
 
-    static int CountElementsEqualToX(int[] array, int x)
+    int minWaitTime = waitTimes.Where(t => t > 0).Min();
+    int maxWaitTime = waitTimes.Max();
+    int avgWaitTime = (int)waitTimes.Where(t => t > 0).Average();
+
+    Console.WriteLine($"Минимальное время ожидания: {minWaitTime} мс");
+    Console.WriteLine($"Максимальное время ожидания: {maxWaitTime} мс");
+    Console.WriteLine($"Среднее время ожидания: {avgWaitTime} мс");
+  }
+
+  static int[] GenerateRandomArray(int size, int min, int max)
+  {
+    int[] array = new int[size];
+    var random = new Random();
+    for (int i = 0; i < size; i++)
     {
-      int count = 0;
-      for (int i = 0; i < array.Length; i++)
-      {
-        if (array[i] == x)
-        {
-          count++;
-        }
-      }
-      return count;
+      array[i] = random.Next(min, max + 1);
     }
+    return array;
+  }
+
+  static int CountElementsEqualToX(int[] array, int x)
+  {
+    int count = 0;
+    for (int i = 0; i < array.Length; i++)
+    {
+      if (array[i] == x)
+      {
+        count++;
+      }
+      else if (array[i] > x)
+      {
+        break;
+      }
+    }
+    return count;
   }
 }
