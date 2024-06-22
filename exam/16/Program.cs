@@ -9,7 +9,6 @@ class Program
   {
     int numThreads = 10;
     Thread[] threads = new Thread[numThreads];
-
     for (int i = 0; i < numThreads; i++)
     {
       int threadIndex = i;
