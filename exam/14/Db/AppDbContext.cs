@@ -13,16 +13,16 @@ namespace app.Db
 			optionsBuilder.UseSqlite("Data Source=./sqlite.db");
 		}
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<Group>()
-					.Navigation(g => g.Items)
-					.AutoInclude();
-		}
+		// protected override void OnModelCreating(ModelBuilder modelBuilder)
+		// {
+		// 	modelBuilder.Entity<Group>()
+		// 			.Navigation(g => g.Items)
+		// 			.AutoInclude();
+		// }
 
-		public AppDbContext()
-		{
-			ChangeTracker.LazyLoadingEnabled = true;
-		}
+		// public AppDbContext()
+		// {
+		// 	ChangeTracker.LazyLoadingEnabled = true;
+		// }
 	}
 }
